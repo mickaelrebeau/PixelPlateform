@@ -1,13 +1,24 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PixelMap</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/pixelmap.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixelMap</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+  <script>window.$ujq = window.$ujq || []; window.uj = window.uj || new Proxy({}, { get: (_, p) => (...a) => window.$ujq.push([p, ...a]) }); document.head.appendChild(Object.assign(document.createElement('script'), { src: 'https://cdn.userjot.com/sdk/v2/uj.js', type: 'module', async: !0 }));</script>
+  <script>
+    window.uj.init('cmiel3zwg01pl15nqveasnj7k', {
+      widget: true,
+      position: 'right',
+      theme: 'auto'
+    });
+  </script>
+</body>
+
 </html>
