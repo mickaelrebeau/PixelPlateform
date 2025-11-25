@@ -7,10 +7,11 @@ export const useCanvasStore = defineStore('canvas', () => {
     const isConnected = ref(false)
     const nickname = ref(localStorage.getItem('nickname') || '')
     const selectedColor = ref('#000000')
-    const cooldowns = reactive(new Map()) // Map<pixelKey, timestamp>
+    const cooldowns = reactive(new Map())
 
     function connect() {
-        socket.value = new WebSocket('ws://localhost:8080')
+        const wsUrl = import.meta.env.VITE_WS_URL || 'ws://localhost:8080'
+        socket.value = new WebSocket(wsUrl)
 
         socket.value.onopen = () => {
             isConnected.value = true
@@ -32,7 +33,6 @@ export const useCanvasStore = defineStore('canvas', () => {
         socket.value.onclose = () => {
             isConnected.value = false
             console.log('Disconnected from WebSocket')
-            // Reconnect logic could go here
         }
     }
 
@@ -48,7 +48,7 @@ export const useCanvasStore = defineStore('canvas', () => {
         const pixel = pixels.get(key)
         const now = Date.now()
         const elapsed = now - pixel.timestamp
-        const cooldown = 300000 // 5 minutes in ms
+        const cooldown = 300000 
 
         if (elapsed < cooldown) {
             const remaining = Math.ceil((cooldown - elapsed) / 1000)
@@ -64,7 +64,7 @@ export const useCanvasStore = defineStore('canvas', () => {
 
     function drawPixel(x, y) {
         if (!socket.value || socket.value.readyState !== WebSocket.OPEN) return
-        if (!nickname.value) return // Should be handled by UI
+        if (!nickname.value) return 
 
         const pixelData = {
             type: 'DRAW',

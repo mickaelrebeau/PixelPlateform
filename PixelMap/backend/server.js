@@ -1,11 +1,13 @@
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ port: 8080 });
+const PORT = process.env.PORT || 8080;
+const wss = new WebSocket.Server({ port: PORT });
 
 const pixels = new Map();
 
-wss.on('connection', (ws) => {
-  console.log('Client connected');
+wss.on('connection', (ws, req) => {
+  console.log('Client connected from:', req.headers.origin);
+
   const initialState = Array.from(pixels.entries()).map(([key, value]) => {
     const [x, y] = key.split(',').map(Number);
     return { x, y, ...value };
@@ -52,4 +54,4 @@ wss.on('connection', (ws) => {
   });
 });
 
-console.log('WebSocket server started on port 8080');
+console.log(`WebSocket server started on port ${PORT}`);
