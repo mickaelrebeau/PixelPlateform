@@ -2,6 +2,7 @@
 import CanvasBoard from './components/CanvasBoard.vue'
 import ColorPalette from './components/ColorPalette.vue'
 import UserOverlay from './components/UserOverlay.vue'
+import { Analytics } from '@vercel/analytics/vue';
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import UserOverlay from './components/UserOverlay.vue'
     <CanvasBoard />
     <ColorPalette />
     <UserOverlay />
+    <Analytics />
   </div>
 </template>
 
