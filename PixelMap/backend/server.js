@@ -1,7 +1,19 @@
 const WebSocket = require('ws');
+const http = require('http');
 
 const PORT = process.env.PORT || 8080;
-const wss = new WebSocket.Server({ port: PORT });
+
+const server = http.createServer((req, res) => {
+  if (req.method === 'GET' && req.url === '/') {
+    res.writeHead(200);
+    res.end('OK');
+    return;
+  }
+  res.writeHead(404);
+  res.end();
+});
+
+const wss = new WebSocket.Server({ server });
 
 const pixels = new Map();
 
@@ -54,4 +66,6 @@ wss.on('connection', (ws, req) => {
   });
 });
 
-console.log(`WebSocket server started on port ${PORT}`);
+server.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
