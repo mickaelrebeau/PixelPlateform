@@ -2,3 +2,4 @@ PixelMap/backend/node_modules/*
 
 PixelMap/frontend/.env.development
 PixelMap/frontend/.env.production
+PixelMap/frontend/.env
